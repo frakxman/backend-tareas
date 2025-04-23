@@ -1,3 +1,5 @@
+# Backend Tareas - Task Management API
+
 <p align="center">
   <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="120" alt="Nest Logo" /></a>
 </p>
@@ -24,28 +26,59 @@
 
 ## Description
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+A robust task management API built with NestJS framework. This application provides a RESTful API for managing tasks with proper validation and data transformation.
 
-## Project setup
+## Project Structure
+
+```
+backend-tareas/
+├── src/
+│   ├── tasks/                  # Tasks module
+│   │   ├── controllers/        # Request handlers
+│   │   ├── services/          # Business logic
+│   │   ├── entities/          # Database entities
+│   │   ├── dtos/             # Data Transfer Objects
+│   │   └── tasks.module.ts    # Module definition
+│   ├── app.module.ts          # Main application module
+│   └── main.ts               # Application entry point
+├── test/                     # Test files
+└── package.json             # Project dependencies
+```
+
+## Features
+
+- Task CRUD operations
+- Input validation using class-validator
+- Data transformation using class-transformer
+- Modular architecture following NestJS best practices
+- TypeScript support
+- Development and production configurations
+
+## Prerequisites
+
+- Node.js (v14 or higher)
+- npm (v6 or higher)
+
+## Installation
 
 ```bash
 $ npm install
 ```
 
-## Compile and run the project
+## Running the Application
 
 ```bash
-# development
+# development mode
 $ npm run start
 
-# watch mode
+# watch mode (recommended for development)
 $ npm run start:dev
 
 # production mode
 $ npm run start:prod
 ```
 
-## Run tests
+## Testing
 
 ```bash
 # unit tests
@@ -58,17 +91,46 @@ $ npm run test:e2e
 $ npm run test:cov
 ```
 
+## API Documentation
+
+The API endpoints will be documented here once they are implemented. Each endpoint will include:
+- HTTP Method
+- URL
+- Request body (if applicable)
+- Response format
+- Example usage
+
+## Dependencies
+
+Main dependencies used in this project:
+- NestJS v10.0.0
+- class-validator
+- class-transformer
+- TypeScript
+- Jest (for testing)
+
+## Development
+
+To contribute to this project:
+
+1. Ensure you have all prerequisites installed
+2. Clone the repository
+3. Install dependencies (`npm install`)
+4. Create a new branch for your feature
+5. Run tests before submitting PR
+6. Follow the existing code style
+
 ## Resources
 
-Check out a few resources that may come in handy when working with NestJS:
+For more information about the technologies used:
 
-- Visit the [NestJS Documentation](https://docs.nestjs.com) to learn more about the framework.
-- For questions and support, please visit our [Discord channel](https://discord.gg/G7Qnnhy).
-- To dive deeper and get more hands-on experience, check out our official video [courses](https://courses.nestjs.com/).
-- Visualize your application graph and interact with the NestJS application in real-time using [NestJS Devtools](https://devtools.nestjs.com).
-- Need help with your project (part-time to full-time)? Check out our official [enterprise support](https://enterprise.nestjs.com).
-- To stay in the loop and get updates, follow us on [X](https://x.com/nestframework) and [LinkedIn](https://linkedin.com/company/nestjs).
-- Looking for a job, or have a job to offer? Check out our official [Jobs board](https://jobs.nestjs.com).
+- [NestJS Documentation](https://docs.nestjs.com)
+- [class-validator Documentation](https://github.com/typestack/class-validator)
+- [TypeScript Documentation](https://www.typescriptlang.org/docs)
+
+## License
+
+This project is [MIT licensed](LICENSE).
 
 ## Support
 
@@ -76,10 +138,5 @@ Nest is an MIT-licensed open source project. It can grow thanks to the sponsors 
 
 ## Stay in touch
 
-- Author - [Kamil Myśliwiec](https://twitter.com/kammysliwiec)
 - Website - [https://nestjs.com](https://nestjs.com/)
 - Twitter - [@nestframework](https://twitter.com/nestframework)
-
-## License
-
-Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
