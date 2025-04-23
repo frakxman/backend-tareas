@@ -1,142 +1,184 @@
-# Backend Tareas - Task Management API
+# Backend Tareas - API REST de Gestión de Tareas
 
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="120" alt="Nest Logo" /></a>
-</p>
+API REST construida con NestJS para la gestión de tareas. Proporciona endpoints para crear, leer, actualizar y eliminar tareas.
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+## 🚀 Características
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg" alt="Donate us"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow" alt="Follow us on Twitter"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+- ✨ Arquitectura REST moderna
+- 📝 Operaciones CRUD completas
+- ✅ Validación de datos con class-validator
+- 🔄 Manejo de errores robusto
+- 🔍 Documentación de API con decoradores
+- 🛡️ Implementación de CORS
+- 📊 Almacenamiento en memoria (expandible a base de datos)
 
-## Description
+## 🛠️ Tecnologías Utilizadas
 
-A robust task management API built with NestJS framework. This application provides a RESTful API for managing tasks with proper validation and data transformation.
+- **NestJS**: Framework backend principal
+- **TypeScript**: Lenguaje de programación tipado
+- **class-validator**: Validación de DTOs
+- **class-transformer**: Transformación de objetos
+- **RxJS**: Manejo de operaciones asíncronas
 
-## Project Structure
+## 📋 Prerrequisitos
+
+- Node.js (v18 o superior)
+- npm (v9 o superior)
+- NestJS CLI (v10 o superior)
+
+## 🔧 Instalación
+
+1. Clonar el repositorio:
+   ```bash
+   git clone <url-del-repositorio>
+   cd backend-tareas
+   ```
+
+2. Instalar dependencias:
+   ```bash
+   npm install
+   ```
+
+3. Iniciar el servidor de desarrollo:
+   ```bash
+   npm run start:dev
+   ```
+
+El servidor estará disponible en `http://localhost:3000`
+
+## 📁 Estructura del Proyecto
 
 ```
-backend-tareas/
-├── src/
-│   ├── tasks/                  # Tasks module
-│   │   ├── controllers/        # Request handlers
-│   │   ├── services/          # Business logic
-│   │   ├── entities/          # Database entities
-│   │   ├── dtos/             # Data Transfer Objects
-│   │   └── tasks.module.ts    # Module definition
-│   ├── app.module.ts          # Main application module
-│   └── main.ts               # Application entry point
-├── test/                     # Test files
-└── package.json             # Project dependencies
+src/
+├── tasks/
+│   ├── controllers/
+│   │   └── tasks.controller.ts    # Controlador de tareas
+│   ├── services/
+│   │   └── tasks.service.ts       # Servicio de tareas
+│   ├── dtos/
+│   │   ├── create-task.dto.ts     # DTO para crear tareas
+│   │   └── update-task.dto.ts     # DTO para actualizar tareas
+│   ├── entities/
+│   │   └── task.entity.ts         # Entidad de tarea
+│   └── tasks.module.ts            # Módulo de tareas
+├── app.module.ts                  # Módulo principal
+└── main.ts                       # Punto de entrada
 ```
 
-## Features
+## 🔌 API Endpoints
 
-- Task CRUD operations
-- Input validation using class-validator
-- Data transformation using class-transformer
-- Modular architecture following NestJS best practices
-- TypeScript support
-- Development and production configurations
+### Tareas
 
-## Prerequisites
+- `GET /tasks`
+  - Obtiene todas las tareas
+  - Respuesta: `Task[]`
 
-- Node.js (v14 or higher)
-- npm (v6 or higher)
+- `GET /tasks/:id`
+  - Obtiene una tarea por ID
+  - Respuesta: `Task`
+  - Error: `404` si no se encuentra
 
-## Installation
+- `POST /tasks`
+  - Crea una nueva tarea
+  - Body: `CreateTaskDto`
+  - Respuesta: `Task`
+  - Status: `201` created
+
+- `PUT /tasks/:id`
+  - Actualiza una tarea existente
+  - Body: `UpdateTaskDto`
+  - Respuesta: `Task`
+  - Error: `404` si no se encuentra
+
+- `DELETE /tasks/:id`
+  - Elimina una tarea
+  - Status: `204` no content
+  - Error: `404` si no se encuentra
+
+## 📊 Modelos de Datos
+
+### Task
+
+```typescript
+interface Task {
+  id: number;
+  title: string;
+  completed: boolean;
+  createdAt: Date;
+}
+```
+
+### CreateTaskDto
+
+```typescript
+class CreateTaskDto {
+  @IsString()
+  @IsNotEmpty()
+  title: string;
+
+  @IsBoolean()
+  completed: boolean;
+}
+```
+
+## 🔒 CORS
+
+El servidor está configurado para aceptar solicitudes del frontend en `http://localhost:4200`
+
+## 🧪 Testing
+
+Para ejecutar las pruebas unitarias:
 
 ```bash
-$ npm install
+npm run test
 ```
 
-## Running the Application
+Para ejecutar las pruebas e2e:
 
 ```bash
-# development mode
-$ npm run start
-
-# watch mode (recommended for development)
-$ npm run start:dev
-
-# production mode
-$ npm run start:prod
+npm run test:e2e
 ```
 
-## Testing
+Para ver la cobertura de código:
 
 ```bash
-# unit tests
-$ npm run test
-
-# e2e tests
-$ npm run test:e2e
-
-# test coverage
-$ npm run test:cov
+npm run test:cov
 ```
 
-## API Documentation
+## 📚 Documentación
 
-The API endpoints will be documented here once they are implemented. Each endpoint will include:
-- HTTP Method
-- URL
-- Request body (if applicable)
-- Response format
-- Example usage
+La documentación del código sigue las mejores prácticas de JSDoc y está disponible en los siguientes archivos principales:
 
-## Dependencies
+- `tasks.controller.ts`: Documentación de endpoints
+- `tasks.service.ts`: Documentación de lógica de negocio
+- `task.entity.ts`: Documentación del modelo de datos
 
-Main dependencies used in this project:
-- NestJS v10.0.0
-- class-validator
-- class-transformer
-- TypeScript
-- Jest (for testing)
+## 🔄 Estado del Almacenamiento
 
-## Development
+Actualmente, los datos se almacenan en memoria. Para implementar persistencia, se puede:
 
-To contribute to this project:
+1. Integrar TypeORM/Mongoose para bases de datos SQL/NoSQL
+2. Implementar un servicio de caché como Redis
+3. Utilizar un servicio de almacenamiento en la nube
 
-1. Ensure you have all prerequisites installed
-2. Clone the repository
-3. Install dependencies (`npm install`)
-4. Create a new branch for your feature
-5. Run tests before submitting PR
-6. Follow the existing code style
+## 🤝 Contribuir
 
-## Resources
+1. Fork el proyecto
+2. Crear una rama para tu feature (`git checkout -b feature/AmazingFeature`)
+3. Commit tus cambios (`git commit -m 'Add some AmazingFeature'`)
+4. Push a la rama (`git push origin feature/AmazingFeature`)
+5. Abrir un Pull Request
 
-For more information about the technologies used:
+## 📝 Licencia
 
-- [NestJS Documentation](https://docs.nestjs.com)
-- [class-validator Documentation](https://github.com/typestack/class-validator)
-- [TypeScript Documentation](https://www.typescriptlang.org/docs)
+Este proyecto está bajo la Licencia MIT - ver el archivo [LICENSE.md](LICENSE.md) para más detalles.
 
-## License
+## ✍️ Autores
 
-This project is [MIT licensed](LICENSE).
+- Tu Nombre - *Desarrollo Inicial* - [TuUsuario](https://github.com/TuUsuario)
 
-## Support
+## 🎉 Agradecimientos
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
-
-## Stay in touch
-
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+- NestJS Team por el excelente framework
+- La comunidad de TypeScript
+- Todos los contribuidores que ayudaron a mejorar este proyecto
